@@ -12,7 +12,7 @@ DEFAULT_RELEASES = (
     "GWTC-1-confident",
     "GWTC-2.1-confident",
     "GWTC-3-confident",
-    "GWRC-4-confident",
+    "GWTC-4.1"
 )
 
 

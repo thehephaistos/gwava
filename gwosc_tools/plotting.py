@@ -78,9 +78,9 @@ def plot_masses(
     axis.set_yscale("log")
     axis.set_ylim(1, 220)
     axis.set_xlim(-1, len(dataframe))
-    axis.set_yticks([1, 2, 5, 10, 20, 50, 100, 200])
+    axis.set_yticks([1, 2, 5, 10, 20, 50, 100, 200, 250])
     axis.set_yticklabels(
-        ["1", "2", "5", "10", "20", "50", "100", "200"],
+        ["1", "2", "5", "10", "20", "50", "100", "200", "250"],
         color="gray",
     )
     axis.set_xticks([])
