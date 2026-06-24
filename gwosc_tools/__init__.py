@@ -13,9 +13,13 @@ __all__ = [
     "fetch_all",
     "fetch_event_versions",
     "fetch_events_dataframe",
+    "create_peaked_layout",
+    "create_valley_layout",
     "get_yaml",
     "load_config",
     "plot_masses",
+    "SORT_MODES",
+    "sort_events",
 ]
 
 _FUNCTION_MODULES = {
@@ -24,9 +28,13 @@ _FUNCTION_MODULES = {
     "fetch_all": ".api",
     "fetch_event_versions": ".api",
     "fetch_events_dataframe": ".events",
+    "create_peaked_layout": ".sorting",
+    "create_valley_layout": ".sorting",
     "get_yaml": ".config",
     "load_config": ".config",
     "plot_masses": ".plotting",
+    "SORT_MODES": ".sorting",
+    "sort_events": ".sorting",
 }
 
 

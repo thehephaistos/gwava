@@ -29,6 +29,15 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Do not open the plot window (useful together with --save)",
     )
+
+    parser.add_argument(
+        '--sort',
+        default='date',
+        choices=[
+            'date', 
+            'peaked', 
+            'valley'],
+    )
     return parser
 
 
