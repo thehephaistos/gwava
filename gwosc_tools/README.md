@@ -74,7 +74,7 @@ If you use this package in research:
 
 ```bibtex
 @software{package2026,
-  author = {J. Bharadwaj and I. Belkhodka and O. Kirmizi},
+  author = {Jayanth Bharadwaj and Ines Belkhodka and Oguz Kirmizi},
   title = {gwava},
   year = {2026},
   url = {https://github.com/thehephaistos/gwava}
