@@ -34,9 +34,25 @@ def build_parser() -> argparse.ArgumentParser:
         '--sort',
         default='date',
         choices=[
-            'date', 
+            'rising', 
             'peaked', 
-            'valley'],
+            'valley',
+            'falling',
+            'random',
+            'date',
+            'distance',
+            'chirp_mass',
+            'chi_eff',
+            'snr'
+            
+            ],
+            help="choose how events are sorted in the plot. Default is 'date'.",
+    )
+    parser.add_argument(
+        '--random-seed',
+        type=int,
+        default=391,
+        help="Random seed for sorting events when --sort=random is used. Default is 391"
     )
     return parser
 
@@ -55,8 +71,16 @@ def run_argument(argv: Sequence[str] | None = None) -> int:
     if args.plot_masses or args.save:
         from .events import fetch_events_dataframe
         from .plotting import plot_masses
+        from .sorting import sort_events
 
         dataframe = fetch_events_dataframe()
+
+        dataframe = sort_events(
+            dataframe,
+            mode=args.sort,
+            random_seed=args.random_seed
+        )  
+
         figure, _ = plot_masses(dataframe, show=not args.no_show)
 
         if args.save:

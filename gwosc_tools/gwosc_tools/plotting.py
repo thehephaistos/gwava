@@ -89,7 +89,7 @@ def plot_masses(
         "Masses in the Stellar Graveyard",
         color="white",
         fontsize=30,
-        pad=22,
+        pad=24,
     )
     axis.grid(axis="y", color="white", alpha=0.18, linewidth=1)
 
@@ -119,7 +119,7 @@ def plot_masses(
     legend = axis.legend(
         handles=legend_items,
         loc="upper center",
-        bbox_to_anchor=(0.5, 1.02),
+        bbox_to_anchor=(0.5, 1.05),
         ncol=2,
         frameon=False,
     )
