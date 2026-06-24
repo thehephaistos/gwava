@@ -4,7 +4,6 @@ import argparse
 from collections.abc import Sequence
 from pathlib import Path
 
-from .config import load_config
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -12,7 +11,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Load the GWOSC YAML specification and optionally plot event masses."
     )
-    parser.add_argument("yaml_path", type=Path, help="Path to the YAML specification")
+
     parser.add_argument(
         "--plot-masses",
         action="store_true",
@@ -60,13 +59,7 @@ def build_parser() -> argparse.ArgumentParser:
 def run_argument(argv: Sequence[str] | None = None) -> int:
     """Run the command-line application."""
     args = build_parser().parse_args(argv)
-    config = load_config(args.yaml_path)
 
-    info = config.get("info", {})
-    print(f"Loaded YAML: {args.yaml_path}")
-    print(f"API title: {info.get('title', 'unknown')}")
-    print(f"API version: {info.get('version', 'unknown')}")
-    print(f"Documented paths: {len(config.get('paths', {}))}")
 
     if args.plot_masses or args.save:
         from .events import fetch_events_dataframe
