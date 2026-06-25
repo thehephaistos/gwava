@@ -38,6 +38,7 @@ def build_parser() -> argparse.ArgumentParser:
             'valley',
             'falling',
             'random',
+            'diamond',
             'date',
             'distance',
             'chirp_mass',
