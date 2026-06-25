@@ -76,7 +76,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def run_argument(argv: Sequence[str] | None = None) -> int:
-        """Run the command-line application.
+    """Run the command-line application.
 
     Parses command-line arguments, fetches and sorts gravitational-wave
     event data when plotting is requested, and generates or saves the
@@ -96,6 +96,8 @@ def run_argument(argv: Sequence[str] | None = None) -> int:
     Returns:
         int: Exit status code (0 for successful execution).
     """
+        
+    args = build_parser().parse_args(argv)
 
     if args.plot_masses or args.save:
         with loading_indicator("Fetching and preparing GWOSC plot..."):
