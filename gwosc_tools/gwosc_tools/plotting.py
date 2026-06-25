@@ -4,8 +4,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from matplotlib.axes import Axes
+from matplotlib.collections import PathCollection
 from matplotlib.figure import Figure
 from matplotlib.lines import Line2D
+
+from .interaction import PointRecord, enable_point_details
 
 
 
@@ -14,6 +17,7 @@ def plot_masses(
     dataframe: pd.DataFrame,
     *,
     show: bool = True,
+    interactive: bool = True,
 ) -> tuple[Figure, Axes]:
     
 
@@ -48,6 +52,21 @@ def plot_masses(
 
     figure, axis = plt.subplots(figsize=(13, 7), facecolor="black")
     axis.set_facecolor("black")
+    point_records: dict[PathCollection, PointRecord] = {}
+    source_events = dataframe.attrs.get("source_events")
+
+    def source_row(
+        displayed_row: pd.Series,
+        displayed_column: str,
+    ) -> pd.Series:
+        source_index_column = f"_{displayed_column}_event_index"
+        if (
+            isinstance(source_events, pd.DataFrame)
+            and source_index_column in displayed_row.index
+        ):
+            source_index = int(displayed_row[source_index_column])
+            return source_events.iloc[source_index]
+        return displayed_row
 
     for position, (_, row) in enumerate(dataframe.iterrows()):
         mass_1 = float(row["mass_1_source"])
@@ -66,7 +85,7 @@ def plot_masses(
                 alpha=0.65,
                 linewidth=1.2,
             )
-            axis.scatter(
+            final_artist = axis.scatter(
                 position,
                 final_mass,
                 color=blue,
@@ -74,9 +93,14 @@ def plot_masses(
                 edgecolor="black",
                 linewidth=0.4,
                 zorder=4,
+                picker=5 if interactive else None,
+            )
+            point_records[final_artist] = (
+                source_row(row, "final_mass"),
+                "final_mass_source",
             )
 
-        axis.scatter(
+        mass_1_artist = axis.scatter(
             position,
             mass_1,
             color=mass_1_color,
@@ -84,8 +108,14 @@ def plot_masses(
             edgecolor="black",
             linewidth=0.4,
             zorder=5,
+            picker=5 if interactive else None,
         )
-        axis.scatter(
+        point_records[mass_1_artist] = (
+            source_row(row, "mass_1"),
+            "mass_1_source",
+        )
+
+        mass_2_artist = axis.scatter(
             position,
             mass_2,
             color=mass_2_color,
@@ -93,6 +123,11 @@ def plot_masses(
             edgecolor="black",
             linewidth=0.4,
             zorder=5,
+            picker=5 if interactive else None,
+        )
+        point_records[mass_2_artist] = (
+            source_row(row, "mass_2"),
+            "mass_2_source",
         )
 
     axis.set_yscale("log")
@@ -109,7 +144,7 @@ def plot_masses(
         "Masses in the Stellar Graveyard",
         color="white",
         fontsize=30,
-        pad=22,
+        pad=24,
     )
     axis.grid(axis="y", color="white", alpha=0.18, linewidth=1)
 
@@ -139,13 +174,16 @@ def plot_masses(
     legend = axis.legend(
         handles=legend_items,
         loc="upper center",
-        bbox_to_anchor=(0.5, 1.02),
+        bbox_to_anchor=(0.5, 1.05),
         ncol=2,
         frameon=False,
     )
 
     for text, color in zip(legend.get_texts(), [blue, orange]):
         text.set_color(color)
+
+    if interactive:
+        enable_point_details(figure, axis, point_records)
 
     figure.tight_layout()
 

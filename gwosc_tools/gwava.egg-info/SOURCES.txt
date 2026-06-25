@@ -3,6 +3,10 @@ pyproject.toml
 gwava.egg-info/PKG-INFO
 gwava.egg-info/SOURCES.txt
 gwava.egg-info/dependency_links.txt
+<<<<<<< HEAD
+=======
+gwava.egg-info/entry_points.txt
+>>>>>>> developing
 gwava.egg-info/requires.txt
 gwava.egg-info/top_level.txt
 gwosc_tools/__init__.py
