@@ -3,10 +3,7 @@ pyproject.toml
 gwava.egg-info/PKG-INFO
 gwava.egg-info/SOURCES.txt
 gwava.egg-info/dependency_links.txt
-<<<<<<< HEAD
-=======
 gwava.egg-info/entry_points.txt
->>>>>>> developing
 gwava.egg-info/requires.txt
 gwava.egg-info/top_level.txt
 gwosc_tools/__init__.py
@@ -15,5 +12,10 @@ gwosc_tools/api.py
 gwosc_tools/cli.py
 gwosc_tools/config.py
 gwosc_tools/events.py
+gwosc_tools/interaction.py
 gwosc_tools/plotting.py
 gwosc_tools/sorting.py
+gwosc_tools/terminal.py
+tests/test_diamond_layout.py
+tests/test_interaction.py
+tests/test_terminal.py
