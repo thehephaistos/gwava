@@ -201,7 +201,7 @@ def enable_point_details(
     pick_connection = figure.canvas.mpl_connect("pick_event", on_pick)
     key_connection = figure.canvas.mpl_connect("key_press_event", on_key)
 
-    # Retain callback and artist references for the lifetime of the figure.
+    # Retaining callback and artist references for the lifetime of the figure.
     figure._gwosc_point_details = {
         "annotation": annotation,
         "point_records": point_records,
